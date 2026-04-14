@@ -18,6 +18,8 @@
   </a>
 </p>
 
-<div>
-<h2>Visit my portfolio</h2>
+<div id="portofolio">
+  <ul align="center">
+    <summary><h2 style="display: inline-block">Visit my <a href="https://jhintux.vercel.app/">portfolio</a></h2></summary>
+  </ul>
 </div>
