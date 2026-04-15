@@ -18,6 +18,8 @@ pub enum Route {
     Home {},
     #[route("/projects")]
     Projects {},
+    #[route("/tils/:id")]
+    TilDetail { id: String },
     #[route("/experience")]
     Experience {},
     #[route("/tils")]

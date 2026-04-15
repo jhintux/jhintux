@@ -21,4 +21,4 @@ mod experience;
 pub use experience::{Experience, ExperienceSection};
 
 mod tils;
-pub use tils::{Tils, TilsSection};
+pub use tils::{TilDetail, Tils, TilsSection};

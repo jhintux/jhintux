@@ -74,7 +74,7 @@ fn experience() -> Vec<ExperienceEntry> {
 #[component]
 fn ExperienceItem(entry: ExperienceEntry, is_last: bool) -> Element {
     let border = if !is_last {
-        "flex gap-4 sm:gap-6 py-5 border-b border-zinc-100"
+        "flex gap-4 sm:gap-6 py-5 border-b border-zinc-100 dark:border-zinc-800"
     } else {
         "flex gap-4 sm:gap-6 py-5"
     };
@@ -83,23 +83,23 @@ fn ExperienceItem(entry: ExperienceEntry, is_last: bool) -> Element {
         div {
             class: "{border}",
             div { class: "flex flex-col items-center pt-[6px] min-w-[16px]",
-                div { class: "w-2 h-2 rounded-full bg-zinc-300 shrink-0" }
+                div { class: "w-2 h-2 rounded-full bg-zinc-300 shrink-0 dark:bg-zinc-600" }
                 if !is_last {
-                    div { class: "w-px flex-1 bg-zinc-100 mt-2" }
+                    div { class: "w-px flex-1 bg-zinc-100 mt-2 dark:bg-zinc-800" }
                 }
             }
             div { class: "flex-1",
-                p { class: "text-sm text-zinc-400 mb-1.5", "{entry.period}" }
+                p { class: "text-sm text-zinc-400 mb-1.5 dark:text-zinc-500", "{entry.period}" }
                 div { class: "flex items-baseline gap-2 mb-0.5",
-                    h3 { class: "text-base font-medium text-zinc-900", "{entry.role}" }
+                    h3 { class: "text-base font-medium text-zinc-900 dark:text-zinc-100", "{entry.role}" }
                 }
-                p { class: "text-sm text-zinc-500 mb-2", "{entry.company} · {entry.location}" }
-                p { class: "text-sm text-zinc-400 leading-relaxed mb-3", "{entry.description}" }
+                p { class: "text-sm text-zinc-500 mb-2 dark:text-zinc-400", "{entry.company} · {entry.location}" }
+                p { class: "text-sm text-zinc-400 leading-relaxed mb-3 dark:text-zinc-500", "{entry.description}" }
                 div { class: "flex flex-wrap gap-1.5",
                     for tag in entry.tags.iter() {
                         PortfolioTag {
                             label: tag.clone(),
-                            class: "bg-zinc-50 text-zinc-400 border-zinc-100".to_string(),
+                            class: "bg-zinc-50 text-zinc-400 border-zinc-100 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700".to_string(),
                         }
                     }
                 }
@@ -116,7 +116,7 @@ pub fn ExperienceSection() -> Element {
     rsx! {
         section {
             id: "experience",
-            class: "px-8 py-10 border-b border-zinc-100",
+            class: "px-8 py-10 border-b border-zinc-100 dark:border-zinc-800",
             SectionLabel { cms: false, "Experience" }
             div {
                 for (i, item) in entries.into_iter().enumerate() {

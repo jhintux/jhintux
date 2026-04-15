@@ -5,11 +5,11 @@ use crate::views::{ExperienceSection, ProjectsSection, TilsSection};
 use dioxus::prelude::*;
 
 const TECH_TAGS: &[(&str, &str)] = &[
-    ("Axum", "bg-orange-50 text-orange-800 border-orange-200"),
-    ("Springboot", "bg-blue-50 text-blue-800 border-blue-200"),
-    ("Next.js", "bg-zinc-100 text-zinc-600 border-zinc-200"),
-    ("Dioxus", "bg-sky-100 text-sky-600 border-sky-200"),
-    ("PostgreSQL", "bg-green-100 text-green-600 border-green-200"),
+    ("Axum", "bg-orange-50 text-orange-800 border-orange-200 dark:bg-orange-500/15 dark:text-orange-300 dark:border-orange-500/30"),
+    ("Springboot", "bg-blue-50 text-blue-800 border-blue-200 dark:bg-blue-500/15 dark:text-blue-300 dark:border-blue-500/30"),
+    ("Next.js", "bg-zinc-100 text-zinc-600 border-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700"),
+    ("Dioxus", "bg-sky-100 text-sky-600 border-sky-200 dark:bg-sky-500/15 dark:text-sky-300 dark:border-sky-500/30"),
+    ("PostgreSQL", "bg-green-100 text-green-600 border-green-200 dark:bg-green-500/15 dark:text-green-300 dark:border-green-500/30"),
 ];
 
 const CONTACT: &[(&str, &str, &str)] = &[
@@ -27,15 +27,15 @@ fn HeroSection() -> Element {
     rsx! {
         section {
             id: "about",
-            class: "px-8 pt-16 pb-14 border-b border-zinc-100",
-            p { class: "text-xs tracking-widest uppercase text-zinc-400 mb-3", "Fullstack engineer" }
-            h1 { class: "text-5xl font-semibold tracking-tight text-zinc-900 leading-tight mb-2", "Jhintux" }
-            p { class: "text-base text-zinc-500 leading-relaxed mb-1 max-w-xl",
+            class: "px-8 pt-16 pb-14 border-b border-zinc-100 dark:border-zinc-800",
+            p { class: "text-xs tracking-widest uppercase text-zinc-400 mb-3 dark:text-zinc-500", "Fullstack engineer" }
+            h1 { class: "text-5xl font-semibold tracking-tight text-zinc-900 leading-tight mb-2 dark:text-zinc-100", "Jhintux" }
+            p { class: "text-base text-zinc-500 leading-relaxed mb-1 max-w-xl dark:text-zinc-300",
                 "Building backend systems in Rust & Java with a crypto background."
                 br {}
                 "Frontend in React / Next.js — and pushing into Dioxus (Rust → WASM)."
             }
-            p { class: "text-base text-zinc-400 leading-relaxed mb-6 max-w-xl",
+            p { class: "text-base text-zinc-400 leading-relaxed mb-6 max-w-xl dark:text-zinc-500",
                 "Based in Medellín, Colombia. Open to remote opportunities."
             }
             div { class: "flex flex-wrap gap-2 mb-8",
@@ -49,18 +49,18 @@ fn HeroSection() -> Element {
             }
             div { class: "flex items-center gap-3 flex-wrap",
                 button {
-                    class: "text-sm px-5 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-700 transition-colors duration-150 font-medium",
+                    class: "text-sm px-5 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-700 transition-colors duration-150 font-medium dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300",
                     onclick: move |_| scroll_to_id("projects"),
                     "View projects"
                 }
                 a {
-                    class: "text-sm px-5 py-2 border border-zinc-200 text-zinc-600 rounded-lg hover:bg-zinc-50 hover:border-zinc-300 transition-all duration-150",
+                    class: "text-sm px-5 py-2 border border-zinc-200 text-zinc-600 rounded-lg hover:bg-zinc-50 hover:border-zinc-300 transition-all duration-150 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:border-zinc-600",
                     href: "https://drive.google.com/file/d/1gyg_F7ty8_4jwfvzIhscb366cJJBSub-/view?usp=sharing",
                     download: true,
                     "Download CV"
                 }
                 a {
-                    class: "text-sm px-5 py-2 border border-zinc-200 text-zinc-600 rounded-lg hover:bg-zinc-50 hover:border-zinc-300 transition-all duration-150",
+                    class: "text-sm px-5 py-2 border border-zinc-200 text-zinc-600 rounded-lg hover:bg-zinc-50 hover:border-zinc-300 transition-all duration-150 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:border-zinc-600",
                     href: "https://github.com/jhintux",
                     target: "_blank",
                     rel: "noreferrer",
@@ -76,26 +76,26 @@ fn ContactSection() -> Element {
     rsx! {
         section {
             id: "contact",
-            class: "px-8 py-10 border-b border-zinc-100",
+            class: "px-8 py-10 border-b border-zinc-100 dark:border-zinc-800",
             SectionLabel { cms: false, "Contact" }
             div { class: "grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8",
                 for (label, value, href) in CONTACT.iter().copied() {
                     a {
                         key: "{label}",
-                        class: "group block p-4 border border-zinc-100 rounded-xl hover:border-zinc-200 hover:bg-zinc-50/50 transition-all duration-150",
+                        class: "group block p-4 border border-zinc-100 rounded-xl hover:border-zinc-200 hover:bg-zinc-50/50 transition-all duration-150 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-900/60",
                         href,
                         target: if href.starts_with("mailto:") { None } else { Some("_blank") },
                         rel: "noreferrer",
-                        p { class: "text-xs uppercase tracking-widest text-zinc-400 mb-1", "{label}" }
-                        p { class: "text-sm text-blue-600 group-hover:text-blue-700 transition-colors duration-150 break-all",
+                        p { class: "text-xs uppercase tracking-widest text-zinc-400 mb-1 dark:text-zinc-500", "{label}" }
+                        p { class: "text-sm text-blue-600 group-hover:text-blue-700 transition-colors duration-150 break-all dark:text-blue-400 dark:group-hover:text-blue-300",
                             "{value}"
                         }
                     }
                 }
             }
-            div { class: "flex items-center gap-3 p-4 bg-emerald-50 border border-emerald-100 rounded-xl",
+            div { class: "flex items-center gap-3 p-4 bg-emerald-50 border border-emerald-100 rounded-xl dark:bg-emerald-500/15 dark:border-emerald-500/30",
                 span { class: "w-2 h-2 rounded-full bg-emerald-500 shrink-0 animate-pulse" }
-                p { class: "text-sm text-emerald-700",
+                p { class: "text-sm text-emerald-700 dark:text-emerald-300",
                     "Open to remote fullstack / backend roles. Particularly interested in Rust, systems programming, or fintech."
                 }
             }

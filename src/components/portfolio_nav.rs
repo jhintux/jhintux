@@ -14,25 +14,28 @@ pub fn PortfolioNav() -> Element {
     let highlight = match route {
         Route::Home {} => home_active(),
         Route::Projects {} => "projects".to_string(),
+        Route::TilDetail { .. } => "TILs".to_string(),
         Route::Experience {} => "experience".to_string(),
         Route::Tils {} => "TILs".to_string(),
     };
 
     rsx! {
         div {
-            class: "sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-zinc-100",
+            class: "sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-zinc-100 dark:bg-zinc-950/90 dark:border-zinc-800",
             nav {
                 class: "flex items-center justify-between px-4 py-4 sm:px-8",
-                span { class: "text-base font-semibold tracking-tight text-zinc-900 select-none",
-                    "JH."
+                button {
+                    class: "text-base font-semibold tracking-tight text-zinc-900 cursor-pointer dark:text-zinc-100",
+                    onclick: move |_| {nav.push(Route::Home {}); },
+                    "JT"
                 }
                 div { class: "hidden md:flex items-center gap-8",
                     for link in NAV_LINKS.iter().copied() {
                         button {
                             class: if highlight == link {
-                                "text-sm transition-colors duration-150 text-zinc-900 font-medium"
+                                "text-sm transition-colors duration-150 text-zinc-900 font-medium dark:text-zinc-100"
                             } else {
-                                "text-sm transition-colors duration-150 text-zinc-400 hover:text-zinc-700"
+                                "text-sm transition-colors duration-150 text-zinc-400 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-200"
                             },
                             onclick: {
                                 let link = link.to_string();
@@ -49,7 +52,7 @@ pub fn PortfolioNav() -> Element {
                 }
                 div { class: "flex items-center gap-2 sm:gap-3",
                     button {
-                        class: "text-sm px-3 py-1.5 sm:px-4 border border-zinc-200 rounded-lg text-zinc-700 hover:bg-zinc-50 hover:border-zinc-300 transition-all duration-150",
+                        class: "text-sm px-3 py-1.5 sm:px-4 border border-zinc-200 rounded-lg text-zinc-700 hover:bg-zinc-50 hover:border-zinc-300 transition-all duration-150 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:border-zinc-600",
                         onclick: move |_| {
                             *home_active.write() = "contact".to_string();
                             nav.push(Route::Home {});
@@ -59,7 +62,7 @@ pub fn PortfolioNav() -> Element {
                         "contact"
                     }
                     button {
-                        class: "md:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:border-zinc-300 transition-all duration-150",
+                        class: "md:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg border border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:border-zinc-300 transition-all duration-150 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:border-zinc-600",
                         "aria-label": "Open navigation menu",
                         onclick: move |_| *mobile_menu_open.write() = !mobile_menu_open(),
                         svg {
@@ -79,14 +82,14 @@ pub fn PortfolioNav() -> Element {
                 }
             }
             if mobile_menu_open() {
-                div { class: "md:hidden border-t border-zinc-100 px-4 pb-4 pt-3",
+                div { class: "md:hidden border-t border-zinc-100 px-4 pb-4 pt-3 dark:border-zinc-800",
                     div { class: "flex flex-col gap-2",
                         for link in NAV_LINKS.iter().copied() {
                             button {
                                 class: if highlight == link {
-                                    "text-left text-zinc-900 font-medium px-3 py-2 rounded-lg bg-zinc-100"
+                                    "text-left text-zinc-900 font-medium px-3 py-2 rounded-lg bg-zinc-100 dark:text-zinc-100 dark:bg-zinc-800"
                                 } else {
-                                    "text-left text-zinc-500 px-3 py-2 rounded-lg hover:bg-zinc-50 hover:text-zinc-700"
+                                    "text-left text-zinc-500 px-3 py-2 rounded-lg hover:bg-zinc-50 hover:text-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-200"
                                 },
                                 onclick: {
                                     let link = link.to_string();

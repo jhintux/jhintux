@@ -8,9 +8,9 @@ fn ProjectCard(project: Project) -> Element {
     let mut hovered = use_signal(|| false);
 
     let border = if project.featured {
-        "relative bg-white rounded-xl p-5 transition-all duration-200 flex flex-col gap-3 border-l-2 border-l-orange-400 border-t border-r border-b border-zinc-100"
+        "relative bg-white rounded-xl p-5 transition-all duration-200 flex flex-col gap-3 border-l-2 border-l-orange-400 border-t border-r border-b border-zinc-100 dark:bg-zinc-900 dark:border-zinc-800 dark:border-l-orange-400"
     } else {
-        "relative bg-white rounded-xl p-5 transition-all duration-200 flex flex-col gap-3 border border-zinc-100 hover:border-zinc-200"
+        "relative bg-white rounded-xl p-5 transition-all duration-200 flex flex-col gap-3 border border-zinc-100 hover:border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-700"
     };
     let shadow = if hovered() { "shadow-sm" } else { "" };
 
@@ -21,26 +21,26 @@ fn ProjectCard(project: Project) -> Element {
             onmouseleave: move |_| *hovered.write() = false,
             if let Some(ref badge) = project.badge {
                 span {
-                    class: "absolute top-4 right-4 text-xs px-2 py-0.5 bg-orange-50 text-orange-700 border border-orange-200 rounded-md",
+                    class: "absolute top-4 right-4 text-xs px-2 py-0.5 bg-orange-50 text-orange-700 border border-orange-200 rounded-md dark:bg-orange-500/15 dark:text-orange-300 dark:border-orange-500/30",
                     "{badge}"
                 }
             }
             div {
-                h3 { class: "text-base font-medium text-zinc-900 mb-1.5 pr-20", "{project.title}" }
-                p { class: "text-sm text-zinc-500 leading-relaxed", "{project.description}" }
+                h3 { class: "text-base font-medium text-zinc-900 mb-1.5 pr-20 dark:text-zinc-100", "{project.title}" }
+                p { class: "text-sm text-zinc-500 leading-relaxed dark:text-zinc-400", "{project.description}" }
             }
             div { class: "flex flex-wrap gap-1.5 mt-auto",
                 for tag in project.tags.iter() {
                     PortfolioTag {
                         label: tag.clone(),
-                        class: "bg-zinc-50 text-zinc-500 border-zinc-100".to_string(),
+                        class: "bg-zinc-50 text-zinc-500 border-zinc-100 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700".to_string(),
                     }
                 }
             }
-            div { class: "flex items-center gap-3 pt-1 border-t border-zinc-50",
+            div { class: "flex items-center gap-3 pt-1 border-t border-zinc-50 dark:border-zinc-800",
                 if let Some(ref url) = project.github {
                     a {
-                        class: "text-sm text-zinc-400 hover:text-zinc-700 transition-colors duration-150 flex items-center gap-1",
+                        class: "text-sm text-zinc-400 hover:text-zinc-700 transition-colors duration-150 flex items-center gap-1 dark:text-zinc-500 dark:hover:text-zinc-200",
                         href: "{url}",
                         target: "_blank",
                         rel: "noreferrer",
@@ -56,7 +56,7 @@ fn ProjectCard(project: Project) -> Element {
                 }
                 if let Some(ref url) = project.live {
                     a {
-                        class: "text-sm text-zinc-400 hover:text-zinc-700 transition-colors duration-150 flex items-center gap-1",
+                        class: "text-sm text-zinc-400 hover:text-zinc-700 transition-colors duration-150 flex items-center gap-1 dark:text-zinc-500 dark:hover:text-zinc-200",
                         href: "{url}",
                         target: "_blank",
                         rel: "noreferrer",
@@ -86,7 +86,7 @@ pub fn ProjectsSection(projects: Vec<Project>) -> Element {
     rsx! {
         section {
             id: "projects",
-            class: "px-8 py-10 border-b border-zinc-100",
+            class: "px-8 py-10 border-b border-zinc-100 dark:border-zinc-800",
             SectionLabel { cms: true, "Projects" }
             div { class: "grid grid-cols-1 md:grid-cols-2 gap-4",
                 for p in projects {

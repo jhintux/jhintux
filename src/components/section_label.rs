@@ -4,7 +4,7 @@ use dioxus::prelude::*;
 fn CmsBadge() -> Element {
     rsx! {
         span {
-            class: "inline-flex items-center gap-1.5 text-xs px-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-zinc-400 font-normal float-right",
+            class: "inline-flex items-center gap-1.5 text-xs px-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-zinc-400 font-normal float-right dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-500",
             span { class: "w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" }
             "CMS managed"
         }
@@ -22,7 +22,7 @@ pub struct SectionLabelProps {
 pub fn SectionLabel(props: SectionLabelProps) -> Element {
     rsx! {
         div { class: "flex items-center justify-between mb-6",
-            span { class: "text-xs tracking-widest uppercase text-zinc-400 font-medium",
+            span { class: "text-xs tracking-widest uppercase text-zinc-400 font-medium dark:text-zinc-500",
                 {props.children}
             }
             if props.cms {

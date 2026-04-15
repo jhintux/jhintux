@@ -83,6 +83,21 @@ pub fn fetch_projects(
     }
 }
 
+pub fn fetch_project(id: String) -> impl Future<Output = dioxus::Result<Project, CapturedError>> {
+    async move {
+        let response = reqwest::get(format!("https://cdn.contentful.com/spaces/8310jhjcmnzt/environments/master/entries/{}?access_token=xIO5R3Op8af4a3PjVZ9qdb1WVlBpTe7W1TAcJe44AWg", id))
+        .await.context("Failed to fetch project")?
+        .json::<ContentItem<Project>>()
+        .await.context("Failed to parse project")?;
+
+        Ok(Project {
+            tags: response.metadata.tags.into_iter().map(|tag| tag.sys.id).collect::<Vec<String>>(),
+            id: response.sys.id,
+            ..response.fields
+        })
+    }
+}
+
 #[derive(Deserialize, Clone, PartialEq)]
 pub struct Til {
     #[serde(skip_deserializing)]
@@ -118,5 +133,27 @@ pub fn fetch_tils(
                 ..item.fields
             })
             .collect::<Vec<Til>>())
+    }
+}
+
+pub fn fetch_til(id: String) -> impl Future<Output = dioxus::Result<Til, CapturedError>> {
+    async move {
+        let response = reqwest::get(format!("https://cdn.contentful.com/spaces/8310jhjcmnzt/environments/master/entries/{}?access_token=xIO5R3Op8af4a3PjVZ9qdb1WVlBpTe7W1TAcJe44AWg", id))
+            .await
+            .context("Failed to fetch til")?
+            .json::<ContentItem<Til>>()
+            .await
+            .context("Failed to parse til")?;
+
+        Ok(Til {
+            tags: response
+                .metadata
+                .tags
+                .into_iter()
+                .map(|tag| tag.sys.id)
+                .collect::<Vec<String>>(),
+            id: response.sys.id,
+            ..response.fields
+        })
     }
 }
